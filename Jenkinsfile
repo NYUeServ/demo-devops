@@ -1,4 +1,4 @@
-#!groovy 
+s!groovy 
 
 pipeline {
 	agent any 
@@ -27,7 +27,7 @@ pipeline {
 			steps {
 				sh "mkdir $TMP_DIR"
 				//sh "cp -r . $TMP_DIR"
-				sh "rsync -vaz -e \"demo-devops\" . $DEPLOY_DIR"
+				sh "rsync -vaz -e \"demo-devops\" -e \".tmp\" . $DEPLOY_DIR"
 				//sh "mv $TMP_DIR $DEPLOY_DIR"
 				sh "rm -rf $DEPLOY_DIR/.git"
 			}
