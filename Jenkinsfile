@@ -25,7 +25,8 @@ pipeline {
 
 		stage('Prepare for Deployment') {
 			steps {
-				sh "mkdir $TMP_DIR"
+				//sh "mkdir $TMP_DIR"
+				sh "mkdir $DEPLOY_DIR"
 				//sh "cp -r . $TMP_DIR"
 				sh "rsync -vaz --exclude=demo-devops . $DEPLOY_DIR"
 				//sh "mv $TMP_DIR $DEPLOY_DIR"
