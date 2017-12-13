@@ -25,7 +25,7 @@ pipeline {
 		stage('Prepare for Deployment') {
 			steps {
 				sh "mkdir $DEPLOY_DIR"
-				sh "cp -r . $DEPLOY_DIR"
+				sh "cp -r !($DEPLOY_DIR) $DEPLOY_DIR"
 				sh "rm -rf $DEPLOY_DIR/.git"
 			}
 		}
