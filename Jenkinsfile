@@ -27,7 +27,7 @@ pipeline {
 	                input(message:'Are you sure you want to deploy to Production?')
 	            }
 				echo "Deploying to $HOST"
-				sh "scp -r . HOST:/home/jenkins/"
+				sh "scp -r . $HOST:/home/jenkins/"
 				sh "ssh $HOST -t cd demo-devops & ./run.sh"
 			}
 		}
