@@ -36,6 +36,7 @@ pipeline {
 
 	post {
 		always {
+			echo "Job finished"
 			// junit '*.xml'
 		}
 		success {
