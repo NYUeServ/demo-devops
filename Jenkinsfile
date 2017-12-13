@@ -1,7 +1,11 @@
 #!groovy 
 
-pipelines {
+pipeline {
 	agent any 
+
+	environment {
+		HOST = "ec2-54-175-216-183.compute-1.amazonaws.com"
+	}
 
 	stages {
 		stage('Checkout') {
@@ -20,8 +24,13 @@ pipelines {
 
 	stage('Deploy') {
 		steps {
+			timeout(time: 30, unit: 'SECONDS'){
+                input(message:'Are you sure you want to deploy to Production?')
+            }
 			echo "Deploying to ..."
 			// TODO: Deploy steps
+			// copy files to EC2 Host
+			// sh "./run.sh"
 		}
 	}
 
