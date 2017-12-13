@@ -13,24 +13,24 @@ pipeline {
 				checkout scm
 			}
 		}
-	}
 
-	stage('Unit Tests') {
-		steps {
-			echo "Starting Tests"
-			// TODO: Run unit tests on the updated code
+		stage('Unit Tests') {
+			steps {
+				echo "Starting Tests"
+				// TODO: Run unit tests on the updated code
+			}
 		}
-	}
 
-	stage('Deploy') {
-		steps {
-			timeout(time: 30, unit: 'SECONDS'){
-                input(message:'Are you sure you want to deploy to Production?')
-            }
-			echo "Deploying to ..."
-			// TODO: Deploy steps
-			// copy files to EC2 Host
-			// sh "./run.sh"
+		stage('Deploy') {
+			steps {
+				timeout(time: 30, unit: 'SECONDS'){
+	                input(message:'Are you sure you want to deploy to Production?')
+	            }
+				echo "Deploying to ..."
+				// TODO: Deploy steps
+				// copy files to EC2 Host
+				// sh "./run.sh"
+			}
 		}
 	}
 
