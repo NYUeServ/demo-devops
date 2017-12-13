@@ -26,10 +26,9 @@ pipeline {
 				timeout(time: 30, unit: 'SECONDS'){
 	                input(message:'Are you sure you want to deploy to Production?')
 	            }
-				echo "Deploying to ..."
-				// TODO: Deploy steps
-				// copy files to EC2 Host
-				// sh "./run.sh"
+				echo "Deploying to $HOST"
+				scp -r . HOST:/home/jenkins/
+				sh "ssh $HOST -t cd demo-devops & ./run.sh"
 			}
 		}
 	}
