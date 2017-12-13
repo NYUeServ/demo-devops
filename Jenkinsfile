@@ -5,6 +5,7 @@ pipeline {
 
 	environment {
 		HOST = "ec2-54-175-216-183.compute-1.amazonaws.com"
+		DEPLOY_DIR = "demo-devops/"
 	}
 
 	stages {
@@ -21,14 +22,28 @@ pipeline {
 			}
 		}
 
+		stage('Prepare for Deployment') {
+			steps {
+				sh "cp -r . $DEPLOY_DIR"
+				sh "rm -rf $DEPLOY_DIR/.git"
+			}
+		}
+
 		stage('Deploy') {
 			steps {
 				timeout(time: 30, unit: 'SECONDS'){
 	                input(message:'Are you sure you want to deploy to Production?')
 	            }
 				echo "Deploying to $HOST"
-				sh "scp -r . $HOST:/home/jenkins/"
-				sh "ssh $HOST -t cd demo-devops & ./run.sh"
+				sh "scp -r $DEPLOY_DIR $HOST:/home/jenkins/"
+				sh "ssh $HOST -t cd $DEPLOY_DIR & ./run.sh"
+			}
+		}
+
+		stage('Clean Up') {
+			steps { 
+				echo "Cleaning up"
+				sh "rm -rf $DEPLOY_DIR"
 			}
 		}
 	}
