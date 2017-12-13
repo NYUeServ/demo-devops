@@ -6,6 +6,7 @@ pipeline {
 	environment {
 		HOST = "ec2-54-175-216-183.compute-1.amazonaws.com"
 		DEPLOY_DIR = "demo-devops/"
+		TMP_DIR = ".tmp/"
 	}
 
 	stages {
@@ -24,8 +25,9 @@ pipeline {
 
 		stage('Prepare for Deployment') {
 			steps {
-				sh "mkdir $DEPLOY_DIR"
-				sh "cp -r !($DEPLOY_DIR) $DEPLOY_DIR"
+				sh "mkdir $TMP_DIR"
+				sh "cp -r $TMP_DIR"
+				sh "mv $TMP_DIR $DEPLOY_DIR"
 				sh "rm -rf $DEPLOY_DIR/.git"
 			}
 		}
