@@ -5,7 +5,7 @@ pipeline {
 
 	environment {
 		HOST = "ec2-54-175-216-183.compute-1.amazonaws.com"
-		DEPLOY_DIR = "demo-devops/"
+		DEPLOY_DIR = "demo-devops"
 		TMP_DIR = ".tmp/"
 	}
 
@@ -28,7 +28,7 @@ pipeline {
 				//sh "mkdir $TMP_DIR"
 				sh "mkdir $DEPLOY_DIR"
 				//sh "cp -r . $TMP_DIR"
-				sh "rsync -vaz --exclude=demo-devops . $DEPLOY_DIR"
+				sh "rsync -vaz --exclude=$DEPLOY_DIR . $DEPLOY_DIR"
 				//sh "mv $TMP_DIR $DEPLOY_DIR"
 				sh "rm -rf $DEPLOY_DIR/.git"
 			}
