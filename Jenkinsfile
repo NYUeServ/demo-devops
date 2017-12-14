@@ -37,7 +37,12 @@ pipeline {
 	            }
 				echo "Deploying to $HOST"
 				sh "scp -r $DEPLOY_DIR $HOST:/home/jenkins/"
-				sh "ssh $HOST -t cd $DEPLOY_DIR & ./run.sh"
+				sh """
+					# Just used this as a one-off to accept the host key on the first run.
+             		ssh -o StrictHostKeyChecking=no $HOST /bin/true
+					
+					ssh $HOST ./$DEPLOY_DIR/run.sh
+				"""
 			}
 		}
 	}
