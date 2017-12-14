@@ -20,7 +20,7 @@ pipeline {
 				echo "Starting Tests"
 				sh """
 					sudo docker build -t helloworldtests .
-					sudo docker run --name helloworldtests --rm -v $PWD:/app --entrypoint 'nosetests' helloworldtests test_service.py --with-xunit
+					sudo docker run --name helloworldtests --rm -v $WORKSPACE:/app --entrypoint 'nosetests' helloworldtests test_service.py --with-xunit
 				"""
 			}
 		}
