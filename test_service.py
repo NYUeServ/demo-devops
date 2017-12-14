@@ -5,13 +5,10 @@
 # or use
 # nosetests
 # For junit with nosetests use:
-# nosetests --with-xunit
+# nosetests test_service.py --with-xunit
 
 import service
-try:
-    import unittest2 as unittest
-except ImportError:
-    import unittest
+import unittest
 
 class TestServer(unittest.TestCase):
 

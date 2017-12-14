@@ -18,7 +18,10 @@ pipeline {
 		stage('Unit Tests') {
 			steps {
 				echo "Starting Tests"
-				// TODO: Run unit tests on the updated code
+				sh """
+					sudo docker build -t helloworldtests .
+					sudo docker run --name helloworldtests --rm -v $PWD:/app --entrypoint 'nosetests' helloworldtests test_service.py --with-xunit
+				"""
 			}
 		}
 
@@ -51,7 +54,7 @@ pipeline {
 	post {
 		always {
 			echo "Job finished"
-			// junit '*.xml'
+			junit 'nosetests.xml'
 
 			echo "Cleaning up"
 			sh "rm -rf $DEPLOY_DIR"
