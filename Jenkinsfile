@@ -6,7 +6,6 @@ pipeline {
 	environment {
 		HOST = "ec2-54-175-216-183.compute-1.amazonaws.com"
 		DEPLOY_DIR = "demo-devops"
-		TMP_DIR = ".tmp/"
 	}
 
 	stages {
@@ -25,11 +24,8 @@ pipeline {
 
 		stage('Prepare for Deployment') {
 			steps {
-				//sh "mkdir $TMP_DIR"
 				sh "mkdir $DEPLOY_DIR"
-				//sh "cp -r . $TMP_DIR"
 				sh "rsync -vaz --exclude=$DEPLOY_DIR . $DEPLOY_DIR"
-				//sh "mv $TMP_DIR $DEPLOY_DIR"
 				sh "rm -rf $DEPLOY_DIR/.git"
 			}
 		}
@@ -44,19 +40,15 @@ pipeline {
 				sh "ssh $HOST -t cd $DEPLOY_DIR & ./run.sh"
 			}
 		}
-
-		stage('Clean Up') {
-			steps { 
-				echo "Cleaning up"
-				sh "rm -rf $DEPLOY_DIR"
-			}
-		}
 	}
 
 	post {
 		always {
 			echo "Job finished"
 			// junit '*.xml'
+
+			echo "Cleaning up"
+			sh "rm -rf $DEPLOY_DIR"
 		}
 		success {
 			slackSend channel: "#demo", 
