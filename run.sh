@@ -4,6 +4,6 @@ DEPLOY_DIR="demo-devops"
 
 cd $DEPLOY_DIR
 
-docker kill helloworld
-docker build -t helloworld .
-docker run -d -p 5000:5000 --name helloworld --rm helloworld
+sudo docker kill helloworld
+sudo docker build -t helloworld .
+sudo docker run -d -p 5000:5000 --name helloworld --rm helloworld
