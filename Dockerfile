@@ -14,17 +14,17 @@ RUN apk add --update \
 ENV PORT 5000
 EXPOSE $PORT
 
-VOLUME /app
-
 # Set up a working folder and install the pre-reqs
 WORKDIR /app
 ADD requirements.txt /app
 RUN pip install -r requirements.txt
 
 # Add the code as the last Docker layer because it changes the most
-# ADD static /app/static
-# ADD service.py /app
-# ADD test_service.py /app
+ADD static /app/static
+ADD service.py /app
+ADD test_service.py /app
+
+VOLUME /tests
 
 # Run the service
 ENTRYPOINT [ "python", "service.py" ]

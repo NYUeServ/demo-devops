@@ -6,6 +6,7 @@ pipeline {
 	environment {
 		HOST = "ec2-54-175-216-183.compute-1.amazonaws.com"
 		DEPLOY_DIR = "demo-devops"
+		TEST_DIR = "tests"
 	}
 
 	stages {
@@ -19,8 +20,9 @@ pipeline {
 			steps {
 				echo "Starting Tests"
 				sh """
+					mkdir $TEST_DIR
 					sudo docker build -t helloworldtests .
-					sudo docker run --name helloworldtests --rm -v $WORKSPACE:/app --entrypoint 'nosetests' helloworldtests test_service.py --with-xunit
+					sudo docker run --name helloworldtests --rm -v $WORKSPACE/$TEST_DIR:/$TEST_DIR --entrypoint 'nosetests' helloworldtests test_service.py --with-xunit --xunit-file=/$TEST_DIR/nosetests.xml
 				"""
 			}
 		}
@@ -54,7 +56,7 @@ pipeline {
 	post {
 		always {
 			echo "Job finished"
-			junit 'nosetests.xml'
+			junit '$TEST_DIR/nosetests.xml'
 
 			echo "Cleaning up"
 			sh "rm -rf $DEPLOY_DIR"
