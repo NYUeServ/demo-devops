@@ -56,7 +56,7 @@ pipeline {
 	post {
 		always {
 			echo "Job finished"
-			junit '$TEST_DIR/nosetests.xml'
+			junit "$TEST_DIR/nosetests.xml"
 
 			echo "Cleaning up"
 			sh "rm -rf $DEPLOY_DIR"
