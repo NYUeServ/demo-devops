@@ -59,7 +59,7 @@ pipeline {
 			junit "$TEST_DIR/nosetests.xml"
 
 			echo "Cleaning up"
-			sh "rm -rf $DEPLOY_DIR"
+			sh "rm -rf $DEPLOY_DIR $TEST_DIR"
 		}
 		success {
 			slackSend channel: "#demo", 
