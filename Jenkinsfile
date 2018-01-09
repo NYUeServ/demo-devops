@@ -64,12 +64,12 @@ pipeline {
 		success {
 			slackSend channel: "#demo", 
 			color: "good", 
-			message: "Deployed application SUCCESS. See ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>). \n WebApp deploy to <$HOST:5000> :yay:"
+			message: "Deployed application SUCCESS. See ${env.JOB_NAME} ${env.BUILD_NUMBER} (<$BUILD_URL|Open>). \n WebApp deploy to <$HOST:5000> :yay:"
 		}
 		failure {
 			slackSend channel: "#demo",
 			color: "danger",
-			message: "Deploy FAILED. See ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+			message: "Deploy FAILED. See ${env.JOB_NAME} ${env.BUILD_NUMBER} (<$BUILD_URL|Open>)"
 		}
 	}
 }
