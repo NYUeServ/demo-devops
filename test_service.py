@@ -22,7 +22,7 @@ class TestServer(unittest.TestCase):
         self.assertEquals(resp.status_code, 200)
 
     def test_math1(self):
-    	self.assertTrue(3+4 == 6)
+    	self.assertTrue(3+4 == 7)
 
 
 if __name__ == '__main__':
