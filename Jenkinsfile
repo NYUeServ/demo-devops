@@ -62,33 +62,6 @@ pipeline {
 			sh "rm -rf $DEPLOY_DIR $TEST_DIR"
 			
 			- echo "Starting Ghost Inspector tests"
-    - results=$(curl -s "https://api.ghostinspector.com/v1/tests/5ca7a0a436caaa1fcaabd839/execute/?apiKey=b96df7f3ed65abb075c6f3b3dfcf959c6e3daf4a")
-
-    - if [[ $(jq '.code' <<< $results) != "\"SUCCESS\"" ]]; then
-    -   echo "Tests failed to run!"
-    -   echo ""
-    -   echo "$results"
-    -   exit 1
-    - fi
-    - IFS=$'\n'
-    - lines=$(jq '.' <<< $results)
-    - passing=1
-    - counter=0
-    - for line in $lines; do
-    -   printf "$counter "
-    -   'if [[ "$line" =~ "\"passing\": false," || "$line" =~ "\"passing\": null," ]]; then'
-    -     passing=0
-    -     printf "***> "
-    -   fi
-    -   echo "$line"
-    -   let counter=counter+1
-    - done
-    - if [ "$passing" -gt 0 ]; then
-    -   echo "Ghost Inspector Integration tests PASSED SUCCESSFULLY!"
-    - else
-    -   echo "Ghost Inspector Integration tests FAILED!!!"
-    -   exit 1
-    - fi
 		}
 		success {
 			slackSend channel: "#demo", 
