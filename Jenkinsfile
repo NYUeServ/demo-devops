@@ -60,8 +60,6 @@ pipeline {
 
 			echo "Cleaning up"
 			sh "rm -rf $DEPLOY_DIR $TEST_DIR"
-			
-			- echo "Starting Ghost Inspector tests"
 		}
 		success {
 			slackSend channel: "#demo", 
