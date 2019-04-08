@@ -38,9 +38,9 @@ pipeline {
 
 		stage('Deploy') {
 			steps {
-				timeout(time: 30, unit: 'SECONDS'){
-	                input(message:'Are you sure you want to deploy to Production?')
-	            }
+				//timeout(time: 30, unit: 'SECONDS'){
+	                //input(message:'Are you sure you want to deploy to Production?')
+	            //}
 				echo "Deploying to $HOST"
 				sh "scp -r $DEPLOY_DIR $HOST:/home/jenkins/"
 				sh """
