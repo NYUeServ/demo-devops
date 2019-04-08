@@ -24,7 +24,7 @@ pipeline {
 				//	sudo docker build -t helloworldtests .
 				//	sudo docker run --name helloworldtests --rm -v $WORKSPACE/$TEST_DIR:/$TEST_DIR --entrypoint 'nosetests' helloworldtests test_service.py --with-xunit --xunit-file=/$TEST_DIR/nosetests.xml
 				//curl -X GET \'https://api.ghostinspector.com/v1/tests/5ca7a0a436caaa1fcaabd839/execute/?apiKey=b96df7f3ed65abb075c6f3b3dfcf959c6e3daf4a&startUrl=http://ec2-54-175-216-183.compute-1.amazonaws.com:5000\'	
-				sh "curl https://api.ghostinspector.com/v1/tests/5ca7a0a436caaa1fcaabd839/execute/?apiKey=b96df7f3ed65abb075c6f3b3dfcf959c6e3daf4a&startUrl=http://ec2-54-175-216-183.compute-1.amazonaws.com:5000\"
+				curl https://api.ghostinspector.com/v1/tests/5ca7a0a436caaa1fcaabd839/execute/?apiKey=b96df7f3ed65abb075c6f3b3dfcf959c6e3daf4a&startUrl=http://ec2-54-175-216-183.compute-1.amazonaws.com:5000\
 				"""
 			}
 		}
