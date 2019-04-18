@@ -7,7 +7,7 @@ pipeline {
 		HOST = "ec2-54-175-216-183.compute-1.amazonaws.com"
 		DEPLOY_DIR = "demo-devops"
 		TEST_DIR = "tests"
-		commitChangeset = sh(returnStdout: true, script: 'git log -1 --pretty=%B' 
+		commitChangeset = sh(returnStdout: true, script: 'git log -1 --pretty=%B')
 	}
 
 	stages {
