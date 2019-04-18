@@ -41,8 +41,10 @@ pipeline {
 			}
 		}
 	}
-
+	
 	post {
+		commitChangeset = sh(returnStdout: true, script: 'git diff-tree --no-commit-id --name-status -r HEAD').trim()
+		
 		always {
 			echo "Job finished"
 
@@ -51,11 +53,12 @@ pipeline {
 
 			echo "Cleaning up"
 			sh "rm -rf $DEPLOY_DIR $TEST_DIR"
+			
 		}
 		success {
 			slackSend channel: "#demo", 
 			color: "good", 
-			message: "Deployed application SUCCESS. \n ${GIT_COMMIT} \n See ${env.JOB_NAME} ${env.BUILD_NUMBER} (<$BUILD_URL|Open>). \n WebApp deploy to <$HOST:5000> \n:yay:"
+			message: "Deployed application SUCCESS. \n ${commitChangeset} \n See ${env.JOB_NAME} ${env.BUILD_NUMBER} (<$BUILD_URL|Open>). \n WebApp deploy to <$HOST:5000> \n:yay:"
 		}
 		failure {
 			slackSend channel: "#demo",
