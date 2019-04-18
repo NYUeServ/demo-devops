@@ -62,7 +62,7 @@ pipeline {
 		failure {
 			slackSend channel: "#demo",
 			color: "danger",
-			message: "Deploy FAILED. \n ${GIT_COMMIT} \nSee ${env.JOB_NAME} ${env.BUILD_NUMBER} (<$BUILD_URL|Open>)"
+			message: "Deploy FAILED. \n ${commitChangeset} \nSee ${env.JOB_NAME} ${env.BUILD_NUMBER} (<$BUILD_URL|Open>)"
 		}
 	}
 }
