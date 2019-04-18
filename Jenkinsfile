@@ -8,7 +8,7 @@ pipeline {
 		DEPLOY_DIR = "demo-devops"
 		TEST_DIR = "tests"
 		//commitChangeset = sh(returnStdout: true, script: 'git diff-tree --no-commit-id --name-status -r HEAD').trim()
-		commitChangeset = git log --format="medium" -1 ${GIT_COMMIT} # print commit, author, date, title & commit message
+		commitChangeset = git log --format="medium" -1 ${GIT_COMMIT} 
 	}
 
 	stages {
