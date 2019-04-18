@@ -7,7 +7,7 @@ pipeline {
 		HOST = "ec2-54-175-216-183.compute-1.amazonaws.com"
 		DEPLOY_DIR = "demo-devops"
 		TEST_DIR = "tests"
-		//commitChangeset = sh(returnStdout: true, script: 'git diff-tree --no-commit-id --name-status -r HEAD').trim() 
+		commitChangeset = sh(returnStdout: true, script: 'git diff-tree --no-commit-id --name-status -r HEAD').trim() 
 	}
 
 	stages {
@@ -57,7 +57,7 @@ pipeline {
 		success {
 			slackSend channel: "#demo", 
 			color: "good", 
-			message: "Deployed application SUCCESS. \n git log --format="medium" -1 ${GIT_COMMIT} \n See ${env.JOB_NAME} ${env.BUILD_NUMBER} (<$BUILD_URL|Open>). \n WebApp deploy to <$HOST:5000> \n:yay:"
+				message: "Deployed application SUCCESS. \n ${commitChangeset} \n See ${env.JOB_NAME} ${env.BUILD_NUMBER} (<$BUILD_URL|Open>). \n WebApp deploy to <$HOST:5000> \n:yay:"
 		}
 		failure {
 			slackSend channel: "#demo",
