@@ -33,7 +33,7 @@ pipeline {
 				echo "Deploying to $HOST"
 				sh "scp -r $DEPLOY_DIR $HOST:/home/jenkins/"
 				sh """
-					# Just used this as a one-off to accept the host key on the first run.
+					# Just used this as a one-offs to accept the host key on the first run.
              		ssh -o StrictHostKeyChecking=no $HOST /bin/true
 					
 					ssh $HOST chmod +x $DEPLOY_DIR/*.sh $DEPLOY_DIR/*.py
