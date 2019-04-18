@@ -57,7 +57,7 @@ pipeline {
 		success {
 			slackSend channel: "#demo", 
 			color: "good", 
-			message: "Deployed application SUCCESS. \n Commit:git log --format="medium" -1 ${GIT_COMMIT} \n See ${env.JOB_NAME} ${env.BUILD_NUMBER} (<$BUILD_URL|Open>). \n WebApp deploy to <$HOST:5000> \n:yay:"
+			message: "Deployed application SUCCESS. \n git log --format="medium" -1 ${GIT_COMMIT} \n See ${env.JOB_NAME} ${env.BUILD_NUMBER} (<$BUILD_URL|Open>). \n WebApp deploy to <$HOST:5000> \n:yay:"
 		}
 		failure {
 			slackSend channel: "#demo",
