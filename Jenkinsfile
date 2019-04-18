@@ -7,7 +7,8 @@ pipeline {
 		HOST = "ec2-54-175-216-183.compute-1.amazonaws.com"
 		DEPLOY_DIR = "demo-devops"
 		TEST_DIR = "tests"
-		commitChangeset = sh(returnStdout: true, script: 'git diff-tree --no-commit-id --name-status -r HEAD').trim()
+		//commitChangeset = sh(returnStdout: true, script: 'git diff-tree --no-commit-id --name-status -r HEAD').trim()
+		commitChangeset = git log --format="medium" -1 ${GIT_COMMIT} # print commit, author, date, title & commit message
 	}
 
 	stages {
