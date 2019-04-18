@@ -7,6 +7,7 @@ pipeline {
 		HOST = "ec2-54-175-216-183.compute-1.amazonaws.com"
 		DEPLOY_DIR = "demo-devops"
 		TEST_DIR = "tests"
+		commitChangeset = sh(returnStdout: true, script: 'git diff-tree --no-commit-id --name-status -r HEAD').trim()
 	}
 
 	stages {
@@ -43,8 +44,6 @@ pipeline {
 	}
 	
 	post {
-		commitChangeset = sh(returnStdout: true, script: 'git diff-tree --no-commit-id --name-status -r HEAD').trim()
-		
 		always {
 			echo "Job finished"
 
